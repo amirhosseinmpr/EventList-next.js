@@ -16,6 +16,33 @@ function FilteredEventsPage() {
     return <p className='center'>Loading...</p>;
   }
 
+  if (!filteredEvents || filteredEvents.length === 0) {
+    return (
+      <Fragment>
+        <ErrorAlert>
+          <p>No events found for the chosen filter!</p>
+        </ErrorAlert>
+        <div className='center'>
+          <Button link='/events'>Show All Events</Button>
+        </div>
+      </Fragment>
+    );
+  }
+
+  const date = new Date(numYear, numMonth - 1);
+
+  return (
+    <Fragment>
+      <ResultsTitle date={date} />
+      <EventList items={filteredEvents} />
+    </Fragment>
+  );
+}
+export async function getServerSideProps(context) {
+  const { params } = context;
+
+  const FilterData = params.slugs;
+
   const filteredYear = filterData[0];
   const filteredMonth = filterData[1];
 
@@ -47,27 +74,9 @@ function FilteredEventsPage() {
     month: numMonth,
   });
 
-  if (!filteredEvents || filteredEvents.length === 0) {
-    return (
-      <Fragment>
-        <ErrorAlert>
-          <p>No events found for the chosen filter!</p>
-        </ErrorAlert>
-        <div className='center'>
-          <Button link='/events'>Show All Events</Button>
-        </div>
-      </Fragment>
-    );
-  }
-
-  const date = new Date(numYear, numMonth - 1);
-
-  return (
-    <Fragment>
-      <ResultsTitle date={date} />
-      <EventList items={filteredEvents} />
-    </Fragment>
-  );
+  return {
+    props: {},
+  };
 }
 
 export default FilteredEventsPage;
