@@ -24,9 +24,9 @@ export async function getEventById(id) {
   return allEvents.find(event => event.id === id);
 }
 
+
 export async function getFilteredEvents(dateFilter) {
   const { year, month } = dateFilter;
-
   const allEvents = await getAllEvents();
   let filteredEvents = allEvents.filter(event => {
     const eventDate = new Date(event.date);
@@ -34,6 +34,5 @@ export async function getFilteredEvents(dateFilter) {
       eventDate.getFullYear() === year && eventDate.getMonth() === month - 1
     );
   });
-
   return filteredEvents;
 }
