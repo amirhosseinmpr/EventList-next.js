@@ -4,10 +4,10 @@ import useSWR from 'swr';
 import Head from 'next/head';
 
 import { getFilteredEvents } from '../../helpers/api-util';
-import EventList from '../../commponents/events/event-list';
-import ResultsTitle from '../../commponents/events/results-title';
-import Button from '../../commponents/ui/button';
-import ErrorAlert from '../../commponents/ui/error-alert';
+import EventList from '../../components/events/event-list';
+import ResultsTitle from '../../components/events/results-title';
+import Button from '../../components/ui/button';
+import ErrorAlert from '../../components/ui/error-alert';
 
 function FilteredEventsPage(props) {
   const [loadedEvents, setLoadedEvents] = useState();
