@@ -11,7 +11,7 @@ function NewsletterRegistration() {
 
     const enteredEmail = emailInputRef.current.value;
 
-    fetch('/pages/api/comments/', {
+    fetch('../pages/api/comments/', {
       method: 'POST',
       body: JSON.stringify({ email: enteredEmail }),
       headers: {

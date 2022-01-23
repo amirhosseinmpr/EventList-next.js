@@ -33,7 +33,8 @@ async function handler(req, res) {
 
     try {
       result = await insertDocument(client, 'comments', newComment);
-      newComment._id = result.insertedId;
+      console.log(result);
+      newComment.id = result.insertedId;
       res.status(201).json({ message: 'Added comment.', comment: newComment });
     } catch (error) {
       res.status(500).json({ message: 'Inserting comment failed!' });
@@ -42,7 +43,12 @@ async function handler(req, res) {
 
   if (req.method === 'GET') {
     const db = client.db();
-    const documents = await db.collection('comments').find().toArray();
+
+    const documents = await db
+      .collection('comments')
+      .find()
+      .sort({ _id: 1 })
+      .toArray();
 
     db.collection('comments').find();
     try {
